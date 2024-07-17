@@ -6,6 +6,7 @@ using System.Timers;
 
 System.Timers.Timer _timer;
  PerformanceCounter _ramCounter;
+
 PerformanceCounter _committedBytesCounter;
 // Initialize the PerformanceCounter for available memory
 _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
@@ -13,8 +14,8 @@ _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
 // Initialize the PerformanceCounter for committed bytes
 _committedBytesCounter = new PerformanceCounter("Memory", "Committed Bytes");
 
-// Set up a timer to trigger every 20 seconds (20000 milliseconds)
-_timer = new System.Timers.Timer(20000);
+// Set up a timer to trigger every 30 seconds (30000 milliseconds)
+_timer = new System.Timers.Timer(30000);
 _timer.Elapsed += OnTimedEvent;
 _timer.AutoReset = true;
 _timer.Enabled = true;
@@ -22,7 +23,7 @@ _timer.Enabled = true;
 Console.WriteLine("Press [Enter] to exit the program...");
 Console.ReadLine();
 
- void OnTimedEvent(Object source, ElapsedEventArgs e)
+void OnTimedEvent(Object source, ElapsedEventArgs e)
 {
     // Get the total and available memory
     var availableMemory = _ramCounter.NextValue();
